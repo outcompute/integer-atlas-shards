@@ -44,3 +44,7 @@ merge → promote to `accepted/`. The CLI shallow-clones the repo and reads `acc
 
 No index file, no published site, no packs registry, no dataset-release machinery — git
 and the directories are the whole system.
+
+## License
+
+MIT — see [LICENSE](LICENSE).

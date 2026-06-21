@@ -1,0 +1,27 @@
+name: PR validate
+
+# Gate every contributor PR before merge: schema-validate the JSON, then
+# independently verify the submitted shard at its pinned algorithm release.
+on:
+  pull_request:
+    paths:
+      - "pending/**"
+      - "computed/**"
+      - "accepted/**"
+      - "schema/**"
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install jsonschema
+      - run: python scripts/validate.py            # schema + range/overlap checks
+
+      # Independent verify: install the executor pinned to each manifest's
+      # algorithm_release, download the shard, match hashes, recompute a sample.
+      - run: pip install "integer-atlas-algos[parquet]"
+      - run: python scripts/verify.py --degree 0.1

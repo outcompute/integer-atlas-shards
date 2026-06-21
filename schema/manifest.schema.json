@@ -1,0 +1,57 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://integer-atlas/schema/manifest.schema.json",
+  "title": "Integer Atlas shard manifest",
+  "description": "A pointer to one computed shard file stored elsewhere, plus what's needed to fetch, load, and verify it.",
+  "type": "object",
+  "required": ["file", "range_start", "range_end", "columns", "row_count", "format", "algorithm_release", "hashes", "storage", "verification"],
+  "additionalProperties": false,
+  "properties": {
+    "file": { "type": "string", "description": "shard filename" },
+    "table": { "type": "string", "default": "numbers", "description": "logical table the columns belong to (numbers, prime_factors, …)" },
+    "range_start": { "type": "integer" },
+    "range_end": { "type": "integer" },
+    "row_count": { "type": "integer", "minimum": 0 },
+    "columns": {
+      "type": "array", "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["name", "type"],
+        "properties": {
+          "name": { "type": "string" },
+          "type": { "type": "string" },
+          "nullable": { "type": "boolean" }
+        }
+      }
+    },
+    "format": { "type": "string", "enum": ["parquet", "csv"] },
+    "compression": { "type": "string" },
+    "algorithm_release": { "type": "string", "description": "Algos repo release/tag that computed this shard" },
+    "generated_at_utc": { "type": "string", "format": "date-time" },
+    "hashes": {
+      "type": "object",
+      "required": ["sha256"],
+      "properties": {
+        "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+        "sha512": { "type": "string", "pattern": "^[0-9a-f]{128}$" },
+        "blake3": { "type": "string", "pattern": "^[0-9a-f]{64}$" }
+      }
+    },
+    "storage": {
+      "type": "array", "minItems": 1,
+      "items": { "type": "string", "description": "public URL to the shard file" }
+    },
+    "verification": {
+      "type": "object",
+      "required": ["status"],
+      "properties": {
+        "status": { "type": "string", "enum": ["computed", "accepted", "deprecated", "superseded", "quarantined"] },
+        "degree": { "type": "number", "minimum": 0, "maximum": 1 },
+        "verified_at_utc": { "type": "string", "format": "date-time" }
+      }
+    },
+    "author": { "type": "string" },
+    "license": { "type": "string" },
+    "replaces": { "type": "string", "description": "filename this supersedes, if any" }
+  }
+}

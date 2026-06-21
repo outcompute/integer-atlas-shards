@@ -1,0 +1,34 @@
+name: Promote
+
+# After a PR merges, move its computed/ entries to accepted/ (flip
+# verification.status to "accepted") and commit to main. publish.yml then rebuilds
+# and deploys. Runs once per merged PR, so it does not re-trigger itself.
+on:
+  pull_request:
+    types: [closed]
+
+permissions:
+  contents: write
+
+jobs:
+  promote:
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          # Use a bot token / GitHub App so the push is allowed and (optionally)
+          # can re-trigger publish.yml.
+          token: ${{ secrets.SHARDS_BOT_TOKEN }}
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python scripts/promote.py     # computed/ -> accepted/, set status, stamp verified_at
+      - name: Commit promotions
+        run: |
+          git config user.name "integer-atlas-bot"
+          git config user.email "bot@integer-atlas"
+          git add -A accepted computed pending
+          git commit -m "promote: accept merged shards" || echo "nothing to promote"
+          git push

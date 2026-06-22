@@ -1,0 +1,151 @@
+{
+  "file": "T-factor-5000001-6000000.parquet",
+  "table": "factor",
+  "range_start": 5000001,
+  "range_end": 6000000,
+  "row_count": 1000000,
+  "columns": [
+    {
+      "name": "n",
+      "type": "int64",
+      "nullable": false
+    },
+    {
+      "name": "prime_factors",
+      "type": "uint64[]",
+      "nullable": false
+    },
+    {
+      "name": "smallest_prime_factor",
+      "type": "uint64",
+      "nullable": false
+    },
+    {
+      "name": "largest_prime_factor",
+      "type": "uint64",
+      "nullable": false
+    },
+    {
+      "name": "radical",
+      "type": "uint64",
+      "nullable": false
+    },
+    {
+      "name": "omega_distinct",
+      "type": "uint16",
+      "nullable": false
+    },
+    {
+      "name": "omega_big",
+      "type": "uint16",
+      "nullable": false
+    },
+    {
+      "name": "euler_phi",
+      "type": "uint64",
+      "nullable": false
+    },
+    {
+      "name": "mobius",
+      "type": "int8",
+      "nullable": false
+    },
+    {
+      "name": "liouville_lambda",
+      "type": "int8",
+      "nullable": false
+    },
+    {
+      "name": "von_mangoldt",
+      "type": "double",
+      "nullable": false
+    },
+    {
+      "name": "is_prime",
+      "type": "bool",
+      "nullable": false
+    },
+    {
+      "name": "is_prime_power",
+      "type": "bool",
+      "nullable": false
+    },
+    {
+      "name": "is_squarefree",
+      "type": "bool",
+      "nullable": false
+    },
+    {
+      "name": "is_powerful",
+      "type": "bool",
+      "nullable": false
+    },
+    {
+      "name": "divisor_count",
+      "type": "uint32",
+      "nullable": false
+    },
+    {
+      "name": "divisor_sum",
+      "type": "uint64",
+      "nullable": false
+    },
+    {
+      "name": "aliquot_sum",
+      "type": "uint64",
+      "nullable": false
+    },
+    {
+      "name": "abundancy_index",
+      "type": "double",
+      "nullable": false
+    },
+    {
+      "name": "abundance_class",
+      "type": "string",
+      "nullable": false
+    },
+    {
+      "name": "is_perfect",
+      "type": "bool",
+      "nullable": false
+    },
+    {
+      "name": "is_practical",
+      "type": "bool",
+      "nullable": false
+    },
+    {
+      "name": "carmichael_lambda",
+      "type": "uint64",
+      "nullable": false
+    },
+    {
+      "name": "gcd_sum_pillai",
+      "type": "uint64",
+      "nullable": false
+    },
+    {
+      "name": "sum_of_two_squares_count",
+      "type": "uint32",
+      "nullable": false
+    }
+  ],
+  "format": "parquet",
+  "compression": "zstd",
+  "algorithm_release": "algos-0.2.2",
+  "generated_at_utc": "2026-06-22T20:50:14Z",
+  "hashes": {
+    "sha256": "2a59023d93a230707f6dd6cb89d39d5ce52524f5af1dbc4e735a16603c7c17c6",
+    "sha512": "1fd16ef47f479a4af762913920993c9b9f9552f9edeb4a8c262dddff00e8713789b245fb42a93124e8c9e65b05329ab81747f984ccb8f3a59da455f03c1afbfa",
+    "blake3": "edd8e43b91aaae47c80ebae0f2be43b8e5fdd9270b48f199fd1bd7de8eb27eb1"
+  },
+  "storage": [
+    "https://files.integer-atlas.com/T-factor-5000001-6000000.parquet"
+  ],
+  "verification": {
+    "status": "accepted"
+  },
+  "author": "outcompute",
+  "license": "CC0-1.0"
+}

@@ -1,0 +1,46 @@
+{
+  "file": "T-repr-5000001-6000000.parquet",
+  "table": "repr",
+  "range_start": 5000001,
+  "range_end": 6000000,
+  "row_count": 1000000,
+  "columns": [
+    {
+      "name": "n",
+      "type": "int64",
+      "nullable": false
+    },
+    {
+      "name": "binary_repr",
+      "type": "string",
+      "nullable": false
+    },
+    {
+      "name": "octal_repr",
+      "type": "string",
+      "nullable": false
+    },
+    {
+      "name": "hex_repr",
+      "type": "string",
+      "nullable": false
+    }
+  ],
+  "format": "parquet",
+  "compression": "zstd",
+  "algorithm_release": "algos-0.2.2",
+  "generated_at_utc": "2026-06-22T20:36:21Z",
+  "hashes": {
+    "sha256": "7b4e8967811c3e92d314515cd0ac1ad9705699f85e7e17979c89c3a7de1dd64d",
+    "sha512": "a26ea9085a6cbf6b57c5446c4d50ee5ddc39959d79899e189aebf127f0150e7c52c5cb6251242f85253e0bcc07bb1bea79333dabda49aeebe73abad7797acfef",
+    "blake3": "549cccf3b3b14828069df1f8130ab3d6cefb27806fcb1b508943916ee7cbd595"
+  },
+  "storage": [
+    "https://files.integer-atlas.com/T-repr-5000001-6000000.parquet"
+  ],
+  "verification": {
+    "status": "accepted"
+  },
+  "author": "outcompute",
+  "license": "CC0-1.0"
+}

@@ -1,0 +1,5 @@
+# Dependencies for the maintainer scripts in this directory.
+#   pip install -r scripts/requirements.txt
+jsonschema                      # validate.py — schema validation of work orders/manifests
+integer-atlas-algos[parquet]    # verify.py — independent shard recompute via atlas-algos
+# plan.py and promote.py use only the standard library.

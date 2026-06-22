@@ -1,0 +1,29 @@
+{
+  "id": "T-core-4000001-5000000",
+  "table": "core",
+  "range_start": 4000001,
+  "range_end": 5000000,
+  "columns": [
+    "abs_n",
+    "sign",
+    "is_even",
+    "is_odd",
+    "bit_length",
+    "dyadic_valuation",
+    "integer_sqrt",
+    "is_square",
+    "is_triangular",
+    "is_fibonacci",
+    "is_perfect_power",
+    "digital_root",
+    "decimal_digit_count",
+    "digit_sum",
+    "is_harshad",
+    "is_palindrome",
+    "binary_popcount",
+    "is_happy",
+    "collatz_stopping_time"
+  ],
+  "algorithm_release": "",
+  "expected_row_count": 1000000
+}

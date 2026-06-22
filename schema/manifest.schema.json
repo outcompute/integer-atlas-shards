@@ -26,7 +26,7 @@
     },
     "format": { "type": "string", "enum": ["parquet", "csv"] },
     "compression": { "type": "string" },
-    "algorithm_release": { "type": "string", "description": "Algos repo release/tag that computed this shard" },
+    "algorithm_release": { "type": "string", "minLength": 1, "description": "Algos repo release/tag that computed this shard (must be stamped, e.g. algos-0.2.1)" },
     "generated_at_utc": { "type": "string", "format": "date-time" },
     "hashes": {
       "type": "object",

@@ -37,12 +37,15 @@ both shapes.
 
 A maintainer authors work orders as JSON files in `pending/` (a range, the columns to
 compute, and the algorithm release). `scripts/plan.py` generates them by tiling a range
-into uniform shard-sized cells:
+into uniform shard-sized cells. Install the script dependencies first
+(`pip install -r scripts/requirements.txt`):
 
 ```
 python scripts/plan.py --start 1 --end 1000000 --shard-size 1000000 \
   --columns "$(atlas-algos columns --csv)" --algorithm-release algos-0.1.0
 ```
+
+Use `--table <group>` to name a column group when you split columns across shards.
 
 ## Collisions
 

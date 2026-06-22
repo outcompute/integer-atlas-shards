@@ -1,0 +1,13 @@
+{
+  "id": "T-repr-7000001-8000000",
+  "table": "repr",
+  "range_start": 7000001,
+  "range_end": 8000000,
+  "columns": [
+    "binary_repr",
+    "octal_repr",
+    "hex_repr"
+  ],
+  "algorithm_release": "",
+  "expected_row_count": 1000000
+}

@@ -31,7 +31,11 @@ def download(url, dest):
     elif "://" not in url:
         shutil.copyfile(url, dest)
     else:
-        urllib.request.urlretrieve(url, dest)
+        # Send an explicit User-Agent: some CDNs (e.g. Cloudflare bot protection)
+        # 403 the default "Python-urllib/x.y" agent.
+        req = urllib.request.Request(url, headers={"User-Agent": "integer-atlas-verify"})
+        with urllib.request.urlopen(req) as r, open(dest, "wb") as f:
+            shutil.copyfileobj(r, f)
 
 
 def main():

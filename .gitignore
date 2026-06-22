@@ -2,3 +2,7 @@ __pycache__/
 *.pyc
 *.tmp
 .DS_Store
+
+# Data files never belong in this pointer repo — they live in object storage.
+*.parquet
+*.csv

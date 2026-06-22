@@ -108,7 +108,7 @@
   ],
   "format": "parquet",
   "compression": "zstd",
-  "algorithm_release": "",
+  "algorithm_release": "algos-0.2.1",
   "generated_at_utc": "2026-06-22T17:21:40Z",
   "hashes": {
     "sha256": "1b102089d1c4f13313c0a3cc4d0e05d1b05b14be721321075ffe9a8ef70dc41b",

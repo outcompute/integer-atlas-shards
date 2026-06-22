@@ -1,5 +1,5 @@
-"""Validate manifests (computed/, accepted/) and work orders (pending/) against the
-JSON schemas, plus basic range sanity. Exits non-zero on any problem.
+"""Validate manifests (accepted/) and work orders (pending/) against the JSON
+schemas, plus basic range sanity. Exits non-zero on any problem.
 """
 import glob
 import json
@@ -20,8 +20,7 @@ def main():
     wo_schema = _load(ROOT / "schema/work-order.schema.json")
     errors = []
 
-    for f in glob.glob(str(ROOT / "computed/**/*.json"), recursive=True) + \
-             glob.glob(str(ROOT / "accepted/**/*.json"), recursive=True):
+    for f in glob.glob(str(ROOT / "accepted/**/*.json"), recursive=True):
         m = _load(f)
         try:
             jsonschema.validate(m, manifest_schema)

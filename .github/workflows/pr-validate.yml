@@ -1,12 +1,12 @@
 name: PR validate
 
 # Gate every contributor PR before merge: schema-validate the JSON, then
-# independently verify the submitted shard at its pinned algorithm release.
+# independently verify the shard(s) the PR adds to accepted/ at their pinned
+# algorithm release.
 on:
   pull_request:
     paths:
       - "pending/**"
-      - "computed/**"
       - "accepted/**"
       - "schema/**"
 
@@ -15,13 +15,28 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - run: pip install jsonschema
-      - run: python scripts/validate.py            # schema + range/overlap checks
 
-      # Independent verify: install the executor pinned to each manifest's
-      # algorithm_release, download the shard, match hashes, recompute a sample.
-      - run: pip install "integer-atlas-algos[parquet]"
-      - run: python scripts/verify.py --degree 0.1
+      # Schema + range checks across all manifests/work orders (cheap).
+      - run: pip install jsonschema
+      - run: python scripts/validate.py
+
+      # Which accepted/ manifests does this PR add or change?
+      - id: changed
+        run: |
+          base="${{ github.event.pull_request.base.sha }}"
+          files=$(git diff --name-only --diff-filter=AM "$base" HEAD -- 'accepted/**/*.json' | tr '\n' ' ')
+          echo "files=$files" >> "$GITHUB_OUTPUT"
+
+      # Independent verify of just those shards: download, match hashes, recompute a sample.
+      - run: |
+          if [ -n "${{ steps.changed.outputs.files }}" ]; then
+            pip install "integer-atlas-algos[parquet]"
+            python scripts/verify.py --degree 0.1 ${{ steps.changed.outputs.files }}
+          else
+            echo "no accepted/ manifests added or changed; nothing to verify"
+          fi

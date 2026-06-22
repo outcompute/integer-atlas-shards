@@ -2,9 +2,9 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://integer-atlas/schema/work-order.schema.json",
   "title": "Integer Atlas work order",
-  "description": "A planned-but-uncomputed shard: a range, the columns to compute, and the algorithm release to compute them with.",
+  "description": "A planned-but-uncomputed shard: a range and the columns to compute. The algorithm version is stamped on the resulting manifest by atlas-algos, not pinned here.",
   "type": "object",
-  "required": ["id", "range_start", "range_end", "columns", "algorithm_release"],
+  "required": ["id", "range_start", "range_end", "columns"],
   "additionalProperties": false,
   "properties": {
     "id": { "type": "string" },

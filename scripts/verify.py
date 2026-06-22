@@ -1,6 +1,7 @@
-"""Verify submitted shards in computed/ before merge.
+"""Independently verify shard manifests before merge.
 
-For each manifest in computed/: download the shard from its storage URL, check the
+For each manifest (the files passed on the command line, or every manifest in
+accepted/ if none are given): download the shard from its storage URL, check the
 SHA-256, and run `atlas-algos verify` to the given degree. Exits non-zero on any
 failure. Requires `atlas-algos` on PATH (CI installs integer-atlas-algos).
 """
@@ -41,11 +42,16 @@ def download(url, dest):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--degree", type=float, default=0.1)
+    ap.add_argument("manifests", nargs="*",
+                    help="manifest files to verify (default: every manifest in accepted/)")
     args = ap.parse_args()
 
-    manifests = sorted((ROOT / "computed").rglob("*.json"))
+    if args.manifests:
+        manifests = [Path(p) for p in args.manifests]
+    else:
+        manifests = sorted((ROOT / "accepted").rglob("*.json"))
     if not manifests:
-        print("no computed/ manifests to verify")
+        print("no manifests to verify")
         return 0
 
     failures = 0

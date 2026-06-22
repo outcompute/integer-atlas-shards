@@ -7,12 +7,11 @@ Kaggle, mirrors). The CLI reads these directories directly.
 ## Layout
 
 ```
-pending/      work orders: a range + columns + algorithm release to compute   [work-order schema]
-computed/     submitted manifests awaiting verification (contributor PRs land here)
-accepted/     verified manifests = the live dataset pointers
+pending/      work orders: a range + columns to compute   [work-order schema]
+accepted/     verified manifests = the live dataset pointers (contributor PRs add here)
 schema/       manifest.schema.json, work-order.schema.json
-scripts/      validate (schema) · verify (download + hashes + atlas-algos) · promote (computed→accepted)
-.github/workflows/   pr-validate · promote
+scripts/      validate (schema) · verify (download + hashes + atlas-algos) · plan (work orders)
+.github/workflows/   pr-validate
 ```
 
 One JSON file per shard/work-order. State = which directory it's in.
@@ -38,9 +37,10 @@ That's everything the CLI needs to fetch, verify, and load the shard. The
 ## Process & consumption
 
 Branches, PR flow, and how the CLI reads the repo are in **[PROCESS.md](PROCESS.md)**.
-In short: one `main` branch; contributor PRs add `computed/…`; CI validates + verifies;
-merge → promote to `accepted/`. The CLI shallow-clones the repo and reads `accepted/`
-(data) and `pending/` (work); `--release` pins a git ref for a reproducible snapshot.
+In short: one `main` branch; a contributor PR adds the manifest straight to `accepted/`;
+CI validates the schema and independently verifies the shard; merge makes it live. The
+CLI shallow-clones the repo and reads `accepted/` (data) and `pending/` (work);
+`--release` pins a git ref for a reproducible snapshot.
 
 No index file, no published site, no packs registry, no dataset-release machinery — git
 and the directories are the whole system.

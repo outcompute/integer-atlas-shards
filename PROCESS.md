@@ -9,9 +9,8 @@ registry, no dataset-release machinery.
 
 | Dir | Holds | Written by |
 | --- | --- | --- |
-| `pending/` | work orders (a range + columns + algo release to compute) | maintainer (drops in a JSON file) |
-| `computed/` | submitted manifests awaiting verification | contributor (PR) |
-| `accepted/` | verified manifests = the live dataset pointers | the promote step (on merge) |
+| `pending/` | work orders (a range + columns to compute) | maintainer (drops in a JSON file) |
+| `accepted/` | verified manifests = the live dataset pointers | contributor (PR, gated by CI) |
 
 One JSON file per shard/work-order, so PRs touch disjoint files. `schema/` validates
 both shapes.
@@ -27,25 +26,28 @@ both shapes.
 ## Contributor flow
 
 1. Compute + upload the shard; `integer-atlas submit` produces the manifest + PR body.
-2. Open a PR adding `computed/<…>.json` and removing the `pending/<…>.json` it fills.
-3. `pr-validate.yml`: schema-check, then download the shard, match hashes, and
-   `atlas-algos verify` at the pinned `algorithm_release`.
-4. A maintainer reviews and merges. `promote.yml` flips status to `accepted` and moves
-   the file `computed/ → accepted/`.
+2. Open a PR adding `accepted/<table>/<id>.json` (and removing the `pending/<id>.json` it
+   fills).
+3. `pr-validate.yml` schema-checks every manifest, then for the manifest(s) the PR adds,
+   downloads the shard, matches hashes, and runs `atlas-algos verify` at the manifest's
+   `algorithm_release`.
+4. A maintainer merges once CI is green — the manifest is live immediately. There is no
+   separate promote step: the `accepted/` directory is the source of truth.
 
 ## Work orders
 
-A maintainer authors work orders as JSON files in `pending/` (a range, the columns to
-compute, and the algorithm release). `scripts/plan.py` generates them by tiling a range
-into uniform shard-sized cells. Install the script dependencies first
-(`pip install -r scripts/requirements.txt`):
+A maintainer authors work orders as JSON files in `pending/` (a range and the columns to
+compute). `scripts/plan.py` generates them by tiling a range into uniform shard-sized
+cells. Install the script dependencies first (`pip install -r scripts/requirements.txt`):
 
 ```
 python scripts/plan.py --start 1 --end 1000000 --shard-size 1000000 \
-  --columns "$(atlas-algos columns --csv)" --algorithm-release algos-0.1.0
+  --columns "$(atlas-algos columns --csv)" --table core
 ```
 
-Use `--table <group>` to name a column group when you split columns across shards.
+Use `--table <group>` to name a column group when you split columns across shards. Work
+orders carry no algorithm version — `atlas-algos` stamps each manifest with its own
+version at compute time.
 
 ## Collisions
 

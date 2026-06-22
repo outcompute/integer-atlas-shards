@@ -5,7 +5,10 @@ planner stays decoupled from the Algos toolchain. Each emitted file follows
 schema/work-order.schema.json. Re-running overwrites by id (idempotent for a fixed grid).
 
   python scripts/plan.py --start 1 --end 1000000 --shard-size 1000000 \
-    --columns "$(atlas-algos columns --csv)" --algorithm-release algos-0.1.0
+    --columns "$(atlas-algos columns --csv)" --table core
+
+Work orders carry no algorithm version: atlas-algos stamps each manifest with its own
+version at compute time, so the release is never pinned at planning time.
 """
 import argparse
 import json
@@ -22,7 +25,8 @@ def main():
     ap.add_argument("--shard-size", type=int, required=True)
     ap.add_argument("--columns", required=True, help="comma-separated column names")
     ap.add_argument("--table", default="numbers")
-    ap.add_argument("--algorithm-release", required=True)
+    ap.add_argument("--algorithm-release", default="",
+                    help="(optional) hint only; atlas-algos stamps the real version at compute time")
     ap.add_argument("--out", default=str(ROOT / "pending"))
     a = ap.parse_args()
 

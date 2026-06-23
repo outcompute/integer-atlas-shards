@@ -1,0 +1,126 @@
+{
+  "file": "T-core-90000001-100000000.parquet",
+  "table": "core",
+  "range_start": 90000001,
+  "range_end": 100000000,
+  "row_count": 10000000,
+  "columns": [
+    {
+      "name": "n",
+      "type": "int64",
+      "nullable": false
+    },
+    {
+      "name": "abs_n",
+      "type": "uint64",
+      "nullable": false
+    },
+    {
+      "name": "sign",
+      "type": "int8",
+      "nullable": false
+    },
+    {
+      "name": "is_even",
+      "type": "bool",
+      "nullable": false
+    },
+    {
+      "name": "is_odd",
+      "type": "bool",
+      "nullable": false
+    },
+    {
+      "name": "bit_length",
+      "type": "uint16",
+      "nullable": false
+    },
+    {
+      "name": "dyadic_valuation",
+      "type": "uint16",
+      "nullable": false
+    },
+    {
+      "name": "integer_sqrt",
+      "type": "uint64",
+      "nullable": false
+    },
+    {
+      "name": "is_square",
+      "type": "bool",
+      "nullable": false
+    },
+    {
+      "name": "is_triangular",
+      "type": "bool",
+      "nullable": false
+    },
+    {
+      "name": "is_fibonacci",
+      "type": "bool",
+      "nullable": false
+    },
+    {
+      "name": "is_perfect_power",
+      "type": "bool",
+      "nullable": false
+    },
+    {
+      "name": "digital_root",
+      "type": "uint8",
+      "nullable": false
+    },
+    {
+      "name": "decimal_digit_count",
+      "type": "uint16",
+      "nullable": false
+    },
+    {
+      "name": "digit_sum",
+      "type": "uint32",
+      "nullable": false
+    },
+    {
+      "name": "is_harshad",
+      "type": "bool",
+      "nullable": false
+    },
+    {
+      "name": "is_palindrome",
+      "type": "bool",
+      "nullable": false
+    },
+    {
+      "name": "binary_popcount",
+      "type": "uint16",
+      "nullable": false
+    },
+    {
+      "name": "is_happy",
+      "type": "bool",
+      "nullable": false
+    },
+    {
+      "name": "collatz_stopping_time",
+      "type": "uint32",
+      "nullable": false
+    }
+  ],
+  "format": "parquet",
+  "compression": "zstd",
+  "algorithm_release": "algos-0.2.2",
+  "generated_at_utc": "2026-06-23T07:50:34Z",
+  "hashes": {
+    "sha256": "f0cc44c623ee960319408a1774f981cf4d9e1f72291a11ecc36870b374c2fad0",
+    "sha512": "f158c51fa8fb1971b21b386dc8dde5583fc276eeedecf0b752b0331c0376ff5f8ea769fde3cb256c3ba023e8ecff77483a243849e9ce340d99b935f255d0caad",
+    "blake3": "62596fd938c79efa8588d54cb0cd9277c5e47debc750024f7ae71154482252b2"
+  },
+  "storage": [
+    "https://files.integer-atlas.com/T-core-90000001-100000000.parquet"
+  ],
+  "verification": {
+    "status": "accepted"
+  },
+  "author": "outcompute",
+  "license": "CC0-1.0"
+}

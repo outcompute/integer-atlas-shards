@@ -45,6 +45,8 @@ CLI shallow-clones the repo and reads `accepted/` (data) and `pending/` (work);
 No index file, no published site, no packs registry, no dataset-release machinery — git
 and the directories are the whole system.
 
-## License
+## License & citation
 
-MIT — see [LICENSE](LICENSE).
+- **Code** (the scripts here) — MIT, see [LICENSE](LICENSE).
+- **Data** (the shards these manifests point to) — **CC BY 4.0**, see [LICENSE-DATA](LICENSE-DATA): use it for anything, including commercially; just attribute. Each manifest also carries `"license": "CC-BY-4.0"`.
+- **Citation** — see [CITATION.cff](CITATION.cff) (GitHub's "Cite this repository").
